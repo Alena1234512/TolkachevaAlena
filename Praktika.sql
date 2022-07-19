@@ -1,4 +1,4 @@
-create database TRY_7832367;
+create database TRY_100500;
 
 create sequence country_id;
 create table country
@@ -57,22 +57,22 @@ create table provider
 id int not null default nextval('provider_id') primary key,
 provider varchar,
 address_provider varchar,
-country_provider varchar
+country_provider int references country(id)
 );
 
 insert into provider (provider, address_provider, country_provider)
 values
 
-('ООО Березка', 'г. Санкт-Петербург ул. Тверская д.14', 'Russia'),
-('ООО Золушка', 'г. Вологда ул. Северная д. 38', 'Russia'),
-('ООО Звонко', 'г. Таганрог ул. Кружева д. 234', 'Russia'),
-('ООО Белый', 'г. Астрахань ул. Медовая д. 83', 'Russia'),
-('ООО Лен', 'г. Сочи ул. Мира д. 84', 'Russia'),
-('ООО Зака', 'г. Ставрополь ул. Пшеничная д. 47', 'Russia'),
-('ООО Кольцо', 'г. Курган ул. Рошина д. 76', 'Russia'),
-('ООО Ракушка', 'г. Новосибирск ул. Ростова д. 54', 'Russia'),
-('ООО Мальты', 'г. Челябинск ул. Пушкина д. 95', 'Russia'),
-('ООО Луна', 'г. Екатеринбург ул. Ленина д. 48', 'Russia');
+('ООО Березка', 'г. Санкт-Петербург ул. Тверская д.14', 1),
+('ООО Золушка', 'г. Вологда ул. Северная д. 38', 1),
+('ООО Звонко', 'г. Таганрог ул. Кружева д. 234', 1),
+('ООО Белый', 'г. Астрахань ул. Медовая д. 83', 1),
+('ООО Лен', 'г. Сочи ул. Мира д. 84', 1),
+('ООО Зака', 'г. Ставрополь ул. Пшеничная д. 47', 1),
+('ООО Кольцо', 'г. Курган ул. Рошина д. 76', 1),
+('ООО Ракушка', 'г. Новосибирск ул. Ростова д. 54', 1),
+('ООО Мальты', 'г. Челябинск ул. Пушкина д. 95', 1),
+('ООО Луна', 'г. Екатеринбург ул. Ленина д. 48', 1);
 
 create sequence product_id;
 
@@ -86,18 +86,18 @@ price real,
 provider_id int references provider(id)
 );
 
-insert into product (name_product, description_product, amount, price)
+insert into product (name_product, description_product, amount, price, provider_id)
 values
-('Processor AMD PRO A6-8580 OEM', 'it is equipped with an AM4 socket and is designed for installation in a medium-power home station or a functional computer', 34, 145),
-('Motherboard Esonic G41CRL3', 'designed to create home and office systems', 545, 46.12),
-('Video card AFOX G 210', 'additional power for computers so that they can provide graphics, video, photo processing and high performance', 365, 40),
-('RAM Hynix HY5PS1G831BFP-S6C 1 ГБ', 'Unbuffered DDR2 memory module, 1024 MB in size, with a frequency of 800 MHz and a bandwidth of 6400 MB/sec', 387, 10),
-('Power supply unit GiNZZU SA400', 'Power 400 Vt, connectors for processor power 4 pin', 263, 12.92),
-('Body Winard 5813', 'The power supply is located on top, the chassis provides the possibility of installing additional 80/90 cm cooling fans on the rear panel and 80/120 cm on the side panel of the housing', 3457, 20),
-('CPU Cooler ID-COOLING DK-01S', 'socket LGA 1156, AM3, LGA 1155, AM3+, LGA 775, AM2+, AM2, FM1, FM2, LGA 1150, FM2+, LGA 1151, AM4, LGA 1151-v2, LGA 1200', 352, 6.15),
-('Cooling system ID-Cooling FROSTFLOW X 120', 'guarantees an effective outflow of hot air from the processor even when the system is overclocked', 364, 60),
-('Fan 5Bites', '7 blades that rotate at a maximum speed of 4200 revolutions per minute, Rated voltage 12V', 213, 1.53),
-('Hard drive 500 Gb', 'providing high-speed access to information stored on the computer, thanks to a 32 MB cache', 632, 60);
+('Processor AMD PRO A6-8580 OEM', 'it is equipped with an AM4 socket and is designed for installation in a medium-power home station or a functional computer', 34, 145, 2),
+('Motherboard Esonic G41CRL3', 'designed to create home and office systems', 545, 46.12, 3),
+('Video card AFOX G 210', 'additional power for computers so that they can provide graphics, video, photo processing and high performance', 365, 40, 1),
+('RAM Hynix HY5PS1G831BFP-S6C 1 ГБ', 'Unbuffered DDR2 memory module, 1024 MB in size, with a frequency of 800 MHz and a bandwidth of 6400 MB/sec', 387, 10, 4),
+('Power supply unit GiNZZU SA400', 'Power 400 Vt, connectors for processor power 4 pin', 263, 12.92, 5),
+('Body Winard 5813', 'The power supply is located on top, the chassis provides the possibility of installing additional 80/90 cm cooling fans on the rear panel and 80/120 cm on the side panel of the housing', 3457, 20, 7),
+('CPU Cooler ID-COOLING DK-01S', 'socket LGA 1156, AM3, LGA 1155, AM3+, LGA 775, AM2+, AM2, FM1, FM2, LGA 1150, FM2+, LGA 1151, AM4, LGA 1151-v2, LGA 1200', 352, 6.15, 10),
+('Cooling system ID-Cooling FROSTFLOW X 120', 'guarantees an effective outflow of hot air from the processor even when the system is overclocked', 364, 60, 8),
+('Fan 5Bites', '7 blades that rotate at a maximum speed of 4200 revolutions per minute, Rated voltage 12V', 213, 1.53, 6),
+('Hard drive 500 Gb', 'providing high-speed access to information stored on the computer, thanks to a 32 MB cache', 632, 60, 9);
 
 create sequence basket_id;
 create table basket
@@ -121,13 +121,11 @@ values
 ((select id from client where phone = '+79603672843'), 9),
 ((select id from client where phone = '+79605192854'), 10);
 
-select * from basket;
-
 select product.id, product.name_product, product.description_product, product.amount, 
 product.price, product.provider_id, 
 provider.id as provider_id, provider.provider, 
 provider.address_provider, provider.country_provider,
-basket.client_id, basket.product_id
+country.name, country.short_code 
 from product 
-left join provider on provider.id = product.provider_id
-right join basket on basket.product_id = product.id;
+right join provider on provider.id = product.provider_id
+left join country on country.id = provider.country_provider;
